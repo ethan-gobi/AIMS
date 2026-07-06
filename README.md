@@ -1,6 +1,16 @@
 # AIMS
 
-AI coding agent for the terminal. Download the Windows build from the [Releases](https://github.com/ethan-gobi/AIMS/releases) page.
+AI coding agent for the terminal.
+
+## Install
+
+**macOS** (one line — no "unidentified developer" warning):
+```
+curl -fsSL https://raw.githubusercontent.com/ethan-gobi/AIMS/main/install.sh | bash
+```
+Then run `AIMS`. (Apple Silicon / M-series. Intel Mac? Email below.)
+
+**Windows:** download `AIMS-windows-x64.exe` from the [Releases](https://github.com/ethan-gobi/AIMS/releases/latest) page and run it. If SmartScreen warns, click **More info → Run anyway**.
 
 ## Name & commercial use
 
