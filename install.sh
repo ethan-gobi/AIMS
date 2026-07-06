@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
-# AIMS installer for macOS.
+# AIMS installer for macOS (Apple Silicon + Intel).
 #   curl -fsSL https://raw.githubusercontent.com/ethan-gobi/AIMS/main/install.sh | bash
 # curl downloads are not quarantined by macOS, so this avoids the Gatekeeper
-# "unidentified developer" warning. It also clears the flag, makes the binary
-# executable, and installs it to your PATH as AIMS.
+# "unidentified developer" / "cannot guarantee free from malware" warning. It
+# also clears the flag, makes the binary executable, and installs it to your
+# PATH as AIMS.
 set -euo pipefail
 REPO="ethan-gobi/AIMS"
 OS="$(uname -s)"
@@ -14,8 +15,8 @@ if [ "$OS" != "Darwin" ]; then
   exit 1
 fi
 case "$ARCH" in
-  arm64) ASSET="AIMS-macos-arm64" ;;
-  x86_64) echo "Intel Mac (x86_64): no x64 build yet - email proffesethgob@gmail.com."; exit 1 ;;
+  arm64) ASSET="AIMS-macos-arm64" ;;                 # Apple Silicon (M1/M2/M3/M4)
+  x86_64) ASSET="AIMS-macos-x64" ;;                  # Intel Mac
   *) echo "Unsupported architecture: $ARCH"; exit 1 ;;
 esac
 URL="https://github.com/$REPO/releases/latest/download/$ASSET"
