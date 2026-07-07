@@ -1,0 +1,79 @@
+name: Screenshot macOS
+
+# Renders the AIMS home screen on a real macOS runner and uploads it as a PNG
+# (+ GIF) artifact, so the Mac look can be reviewed without owning a Mac. It
+# downloads the RELEASED binary (no source needed) and drives it headlessly with
+# VHS, which outputs a truecolor PNG. Tunables are workflow inputs so the capture
+# can be adjusted (size / wait) without editing this file.
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release tag (e.g. v1.0.6) or 'latest'"
+        default: "latest"
+      arch:
+        description: "arm64 (Apple Silicon) or x64 (Intel)"
+        default: "arm64"
+      fontSize:
+        description: "Terminal font size in px"
+        default: "18"
+      width:
+        description: "Image width in px"
+        default: "1500"
+      height:
+        description: "Image height in px"
+        default: "860"
+      delay:
+        description: "Seconds to wait for the home screen before the shot"
+        default: "9"
+
+jobs:
+  shot:
+    runs-on: macos-14
+    steps:
+      - name: Download AIMS binary
+        run: |
+          set -x
+          ASSET="AIMS-macos-${{ inputs.arch }}"
+          if [ "${{ inputs.version }}" = "latest" ]; then
+            URL="https://github.com/ethan-gobi/AIMS/releases/latest/download/$ASSET"
+          else
+            URL="https://github.com/ethan-gobi/AIMS/releases/download/${{ inputs.version }}/$ASSET"
+          fi
+          curl -fSL "$URL" -o AIMS
+          chmod +x AIMS
+          # curl download is not quarantined; ad-hoc-signed binary should run.
+          ./AIMS --version || true
+
+      - name: Install VHS
+        run: brew install vhs
+
+      - name: Render home screen
+        continue-on-error: true
+        run: |
+          set -x
+          cat > home.tape <<EOF
+          Output home.gif
+          Set FontSize ${{ inputs.fontSize }}
+          Set Width ${{ inputs.width }}
+          Set Height ${{ inputs.height }}
+          Set Padding 12
+          Type "./AIMS"
+          Enter
+          Sleep ${{ inputs.delay }}s
+          Screenshot home.png
+          Sleep 1s
+          EOF
+          cat home.tape
+          vhs home.tape
+          ls -la home.png home.gif || true
+
+      - name: Upload render
+        uses: actions/upload-artifact@v4
+        with:
+          name: home-render-${{ inputs.arch }}
+          path: |
+            home.png
+            home.gif
+          if-no-files-found: warn
