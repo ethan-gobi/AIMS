@@ -1,12 +1,44 @@
 # AIMS
 
-**An AI coding agent that lives in your terminal.** Tell it what you want in plain
-English — *"fix the failing tests"*, *"add a login page"* — and AIMS reads your code,
-makes the changes, and runs the commands to get it done. From intent to production.
+**An AI coding agent.** Tell it what you want in plain English — *"fix the failing
+tests"*, *"add a login page"* — and AIMS reads your code, makes the changes, and runs
+the commands to get it done. From intent to production.
+
+AIMS comes in two flavours: a **desktop app** (a clean chat window, like ChatGPT) and a
+**terminal CLI**. They share the same engine — pick whichever you prefer.
 
 ---
 
-## Install
+## Desktop app (recommended)
+
+A simple chat window. No terminal required. Code and tool steps are **hidden by
+default**, so it reads like a normal conversation — flip on **Developer mode** in the
+sidebar when you want to see what it actually did.
+
+**⬇️ [Download the AIMS desktop app](https://github.com/ethan-gobi/AIMS/releases/tag/desktop-v1.0.1)**
+
+| Your computer | File to download |
+| --- | --- |
+| **Mac** (Apple Silicon or Intel) | `Modern-AIMS-1.0.1-universal.dmg` |
+| **Windows** | `Modern-AIMS-Windows-x64.zip` |
+
+**Mac:** open the `.dmg` and drag **Modern AIMS** to Applications. The first launch is
+blocked because the app isn't notarised yet — open **Terminal** once and run:
+
+```
+xattr -cr "/Applications/Modern AIMS.app"
+```
+
+Then open it normally from Applications.
+
+**Windows:** unzip anywhere and run **`Modern AIMS.exe`**. If SmartScreen warns:
+**More info → Run anyway**.
+
+The app checks for updates on launch and tells you when a new version is out.
+
+---
+
+## Terminal CLI
 
 ### macOS (Apple Silicon **or** Intel)
 
@@ -36,12 +68,10 @@ AIMS
 ### Windows
 
 Download **`AIMS-windows-x64.exe`** from the
-[Releases page](https://github.com/ethan-gobi/AIMS/releases/latest) and run it.
+[latest release](https://github.com/ethan-gobi/AIMS/releases/latest) and run it.
 If SmartScreen warns: **More info → Run anyway**.
 
----
-
-## Update
+### Update the CLI
 
 ```
 AIMS update
@@ -54,10 +84,13 @@ Updates in place from the latest release.
 ## How it works
 
 1. **Pick a model.** AIMS connects to the AI you choose — Claude, GPT, or local
-   models via Ollama, plus many more. Type `/connect` to add a provider.
-2. **Describe the task.** Ask in plain English at the prompt.
+   models via Ollama, plus many more. Use the model dropdown in the desktop app, or
+   type `/connect` in the CLI to add a provider.
+2. **Describe the task.** Ask in plain English.
 3. **AIMS does the work.** It reads your files, edits code, runs tests and shell
    commands, and shows you every change before it lands.
+
+Type `/` to see every command available to you.
 
 ---
 
