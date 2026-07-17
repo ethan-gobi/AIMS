@@ -15,11 +15,11 @@ A simple chat window. No terminal required. Code and tool steps are **hidden by
 default**, so it reads like a normal conversation — flip on **Developer mode** in the
 sidebar when you want to see what it actually did.
 
-**⬇️ [Download the AIMS desktop app](https://github.com/ethan-gobi/AIMS/releases/tag/desktop-v1.0.1)**
+**⬇️ [Download the AIMS desktop app](https://github.com/ethan-gobi/AIMS/releases/tag/desktop-v1.0.2)**
 
 | Your computer | File to download |
 | --- | --- |
-| **Mac** (Apple Silicon or Intel) | `Modern-AIMS-1.0.1-universal.dmg` |
+| **Mac** (Apple Silicon or Intel) | `Modern-AIMS-1.0.2-universal.dmg` |
 | **Windows** | `Modern-AIMS-Windows-x64.zip` |
 
 **Mac:** open the `.dmg` and drag **Modern AIMS** to Applications. The first launch is
